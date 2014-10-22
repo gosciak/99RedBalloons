@@ -35,14 +35,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="q6r-6O-eqn"/>
-                                    <barButtonItem title="Next" id="k0z-oc-305">
+                                    <barButtonItem title="Next Balloon" id="k0z-oc-305">
                                         <connections>
                                             <action selector="balloonNextButtonPressed:" destination="BYZ-38-t0r" id="LHA-I7-lLo"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="624" width="370" height="44"/>
+                                    <rect key="frame" x="-10" y="624" width="375" height="44"/>
                                 </variation>
                             </toolbar>
                         </subviews>
