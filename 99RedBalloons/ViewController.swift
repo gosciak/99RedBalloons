@@ -22,29 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        let balloonImageNames = ["RedBalloon1.jpg", "RedBalloon2.jpg", "RedBalloon3.jpg", "RedBalloon4.jpg"]
-        var randomIndex:Int
 
-        for var balloonIndex = 1; balloonIndex <= MAX_BALLOONS; balloonIndex++ {
-            
-            // generate index to create random non-sequential image attachment to Balloon struct element
-            do {
-                randomIndex = Int(arc4random_uniform(UInt32(balloonImageNames.count)))
-            } while self.currentBalloonIndex == randomIndex
-            self.currentBalloonIndex = randomIndex
-            
-            // create Balloon instance and add it to myBaloons array
-            let myBalloon = Balloon(balloonCount: balloonIndex, balloonImage: balloonImageNames[randomIndex])
-            self.myBaloons.append(myBalloon)
-        }
-        
-        // prep for display of first image
-        self.currentBalloonIndex = 0
-        self.myImageView.image = UIImage(named: self.myBaloons[self.currentBalloonIndex].balloonImage)
-        self.balloonLabelText.text = "\(self.myBaloons[self.currentBalloonIndex].balloonCount) Ballon(s)"
-
-        println("Allocated \(myBaloons.count) balloons")
+        self.createBalloonArray()
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,7 +49,7 @@ class ViewController: UIViewController {
         
         // display next element in the myBalloons array
         currentBalloonIndex++ // Increment to the next ballon array element
-        if currentBalloonIndex > myBaloons.count - 1 {
+        if currentBalloonIndex == self.myBaloons.count {
             currentBalloonIndex = 0
         }
         
@@ -84,6 +63,31 @@ class ViewController: UIViewController {
             }, completion: {
                 (finished: Bool) -> () in
         })
+    }
+    
+    private func createBalloonArray() {
+        let balloonImageNames = ["RedBalloon1.jpg", "RedBalloon2.jpg", "RedBalloon3.jpg", "RedBalloon4.jpg"]
+        var randomIndex:Int
+
+        for var balloonIndex = 1; balloonIndex <= MAX_BALLOONS; balloonIndex++ {
+            
+            // generate index to create random non-sequential image attachment to Balloon struct element
+            do {
+                randomIndex = Int(arc4random_uniform(UInt32(balloonImageNames.count)))
+            } while self.currentBalloonIndex == randomIndex
+            self.currentBalloonIndex = randomIndex
+            
+            // create Balloon instance and add it to myBaloons array
+            let myBalloon = Balloon(balloonCount: balloonIndex, balloonImage: balloonImageNames[randomIndex])
+            self.myBaloons.append(myBalloon)
+        }
+        
+        // prep for display of first image
+        self.currentBalloonIndex = 0
+        self.myImageView.image = UIImage(named: self.myBaloons[self.currentBalloonIndex].balloonImage)
+        self.balloonLabelText.text = "\(self.myBaloons[self.currentBalloonIndex].balloonCount) Ballon(s)"
+
+        println("Allocated \(myBaloons.count) balloons")
     }
 }
 
