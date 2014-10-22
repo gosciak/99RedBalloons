@@ -41,17 +41,10 @@ class ViewController: UIViewController {
         animationsList.append(UIViewAnimationOptions.TransitionFlipFromTop)
         
         // get a unique random index into the animations list
-        var randomAnimationIndex:Int
-        do {
-            randomAnimationIndex = Int(arc4random_uniform(UInt32(3)))
-        } while self.currentAnimationIndex == randomAnimationIndex
-        self.currentAnimationIndex = randomAnimationIndex
+        currentAnimationIndex = self.getRandomAnimationIndex()
         
         // display next element in the myBalloons array
-        currentBalloonIndex++ // Increment to the next ballon array element
-        if currentBalloonIndex == self.myBaloons.count {
-            currentBalloonIndex = 0
-        }
+        self.incrCurrentBalloonIndex()
         
         let myBalloon = self.myBaloons[currentBalloonIndex]
 
@@ -88,6 +81,22 @@ class ViewController: UIViewController {
         self.balloonLabelText.text = "\(self.myBaloons[self.currentBalloonIndex].balloonCount) Ballon(s)"
 
         println("Allocated \(myBaloons.count) balloons")
+    }
+    
+    private func incrCurrentBalloonIndex() {
+        currentBalloonIndex++ // Increment to the next ballon array element
+        if currentBalloonIndex == self.myBaloons.count {
+            currentBalloonIndex = 0
+        }
+    }
+    
+    private func getRandomAnimationIndex() ->Int {
+        var randomAnimationIndex:Int
+        do {
+            randomAnimationIndex = Int(arc4random_uniform(UInt32(3)))
+        } while self.currentAnimationIndex == randomAnimationIndex
+        self.currentAnimationIndex = randomAnimationIndex
+        return randomAnimationIndex
     }
 }
 
