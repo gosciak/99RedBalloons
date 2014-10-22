@@ -13,7 +13,4 @@ struct Balloon {
     var balloonCount = 0
     var balloonImage = ""
     
-    func howManyBallons() {
-        println("\(self.balloonCount)")
-    }
 }
