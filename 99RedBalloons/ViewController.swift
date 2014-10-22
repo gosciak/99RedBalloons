@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         for var ballonIndex = 1; ballonIndex <= 99; ballonIndex++ {
             
             do {
-                randomIndex = Int(arc4random_uniform(UInt32(4)))
+                randomIndex = Int(arc4random_uniform(UInt32(balloonImageNames.count)))
             } while self.currentBalloonIndex == randomIndex
             self.currentBalloonIndex = randomIndex
             
