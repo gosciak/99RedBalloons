@@ -44,8 +44,6 @@ class ViewController: UIViewController {
         currentAnimationIndex = self.getRandomAnimationIndex()
         
         // display next element in the myBalloons array
-        self.incrCurrentBalloonIndex()
-        
         let myBalloon = self.myBaloons[currentBalloonIndex]
 
         UIView.transitionWithView(self.view, duration: 2, options: animationsList[currentAnimationIndex], animations: {
@@ -56,6 +54,10 @@ class ViewController: UIViewController {
             }, completion: {
                 (finished: Bool) -> () in
         })
+        
+        // increment for next invocation
+        self.incrCurrentBalloonIndex()
+       
     }
     
     private func createBalloonArray() {
@@ -77,21 +79,18 @@ class ViewController: UIViewController {
         
         // prep for display of first image
         self.currentBalloonIndex = 0
-        self.myImageView.image = UIImage(named: self.myBaloons[self.currentBalloonIndex].balloonImage)
-        self.balloonLabelText.text = "\(self.myBaloons[self.currentBalloonIndex].balloonCount) Ballon(s)"
-
-        println("Allocated \(myBaloons.count) balloons")
     }
     
     private func incrCurrentBalloonIndex() {
-        currentBalloonIndex++ // Increment to the next ballon array element
-        if currentBalloonIndex == self.myBaloons.count {
-            currentBalloonIndex = 0
+        self.currentBalloonIndex++ // Increment to the next ballon array element
+        if self.currentBalloonIndex == self.myBaloons.count {
+            self.currentBalloonIndex = 0
         }
     }
     
     private func getRandomAnimationIndex() ->Int {
         var randomAnimationIndex:Int
+        
         do {
             randomAnimationIndex = Int(arc4random_uniform(UInt32(3)))
         } while self.currentAnimationIndex == randomAnimationIndex
